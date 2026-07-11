@@ -1,7 +1,7 @@
 import { createToken } from "../utils/jwt.ts";
 import { findByEmail, createUser } from "../repositories/user.repository.ts";
 import bcrypt from "bcrypt";
-import { RegisterData } from "../types/auth.Types.ts";
+import { RegisterData, LoginData } from "../types/auth.Types.ts";
 
 export const register = async (data: RegisterData) => {
   const existingUser = await findByEmail(data.email);
@@ -25,6 +25,25 @@ export const register = async (data: RegisterData) => {
       id: newUser.id,
       name: newUser.name,
       email: newUser.email,
+    },
+    token,
+  };
+};
+export const login = async (data: LoginData) => {
+  const user = await findByEmail(data.email);
+  if (!user) {
+    throw new Error("User not found");
+  }
+  const isMatch = await bcrypt.compare(data.password, user.password);
+  if (!isMatch) {
+    throw new Error("Invalid credentials");
+  }
+  const token = createToken(user.id);
+  return {
+    user: {
+      id: user.id,
+      name: user.name,
+      email: user.email,
     },
     token,
   };
