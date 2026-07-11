@@ -3,15 +3,46 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
-model User {
-  id       String      @id @default(cuid())
-  name     String
-  email    String      @unique
-  password String
 
+model User {
+  id        String     @id @default(uuid())
+  name      String
+  email     String     @unique
+  password  String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  urls      ShortUrl[]
+}
+
+model ShortUrl {
+  id          String    @id @default(uuid())
+  originalUrl String
+  shortCode   String?   @unique
+  customAlias String?   @unique
+  title       String?
+  clickCount  Int       @default(0)
+  expiresAt   DateTime?
+  isActive    Boolean   @default(true)
+  userId      String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  clicks      Click[]
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Click {
+  id        String   @id @default(uuid())
+  browser   String?
+  os        String?
+  device    String?
+  country   String?
+  city      String?
+  referer   String?
+  ipHash    String?
+  urlId     String
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  url       ShortUrl @relation(fields: [urlId], references: [id])
 }
