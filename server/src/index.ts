@@ -1,10 +1,14 @@
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 import authroute from "./routes/auth.routes.ts";
+import errorHandler from "./middleware/errorHanddler.ts";
+
 dotenv.config();
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.json({
@@ -13,6 +17,8 @@ app.get("/", (req, res) => {
   });
 });
 
+// 3. THE GLOBAL ERROR HANDLER (Must be last!)
+app.use(errorHandler);
 app.use("/api/auth", authroute);
 
 const PORT = process.env.PORT || 5000;

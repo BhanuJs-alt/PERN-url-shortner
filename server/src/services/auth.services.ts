@@ -1,7 +1,7 @@
 import { createToken } from "../utils/jwt.ts";
 import { findByEmail, createUser } from "../repositories/user.repository.ts";
 import bcrypt from "bcrypt";
-import { RegisterData, LoginData } from "../types/auth.Types.ts";
+import { RegisterData, LoginData } from "../types/auth.types.ts";
 
 export const register = async (data: RegisterData) => {
   const existingUser = await findByEmail(data.email);
@@ -41,7 +41,6 @@ export const login = async (data: LoginData) => {
   const token = createToken(user.id);
   return {
     user: {
-      id: user.id,
       name: user.name,
       email: user.email,
     },

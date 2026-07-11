@@ -49,3 +49,24 @@ export const login = async (
     next(error);
   }
 };
+
+export const userProfile = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const user = req.user;
+    if (!user) {
+      return res.status(404).json({
+        message: "Not found",
+      });
+    }
+    res.json({
+      user: user,
+      message: "Hii",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
