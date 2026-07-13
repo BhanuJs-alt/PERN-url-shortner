@@ -24,8 +24,6 @@ const errorHandler = (
     success: false,
     error: {
       message: message,
-      // Only show the stack trace in development mode
-      stack: process.env.NODE_ENV === "production" ? null : err.stack,
     },
   });
 };

@@ -26,11 +26,3 @@ export const getUrls = async (userId: string) => {
   }
   return urls;
 };
-
-export const resolve = async (shortCode: string) => {
-  const originalUrl = await findByShortCode(shortCode);
-  if (!originalUrl) {
-    throw new Error("Short URL not found");
-  }
-  return originalUrl;
-};

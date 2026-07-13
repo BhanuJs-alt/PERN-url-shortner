@@ -30,17 +30,3 @@ export const getUrls = async (
     next(error);
   }
 };
-
-export const redirectUrl = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
-  try {
-    const { shortCode } = req.params;
-    const result = await urlServices.resolve(shortCode.toString());
-    res.redirect(302, result.originalUrl);
-  } catch (error) {
-    next(error);
-  }
-};

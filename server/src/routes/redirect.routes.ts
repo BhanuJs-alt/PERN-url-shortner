@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { redirectUrl } from "../controllers/url.controller.ts";
+import { redirect } from "../controllers/redirect.controller.ts";
 
 const router = Router();
-router.get("/:shortCode", redirectUrl);
+router.get("/:shortCode", redirect);
 
 export default router;

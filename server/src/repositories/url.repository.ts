@@ -41,10 +41,23 @@ export const deleteShortUrl = async (id: string) => {
     },
   });
 };
-export const findByoriginalUrl = async (originalUrl: string) => {
-  return await prisma.shortUrl.findMany({
+export const findActiveShortUrl = async (shortCode: string) => {
+  return prisma.shortUrl.findFirst({
     where: {
-      originalUrl,
+      shortCode,
+      isActive: true,
+    },
+  });
+};
+export const incrementClickCount = async (id: string) => {
+  return prisma.shortUrl.update({
+    where: {
+      id,
+    },
+    data: {
+      clickCount: {
+        increment: 1,
+      },
     },
   });
 };
