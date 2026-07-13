@@ -1,4 +1,8 @@
-import { createShortUrl } from "../repositories/url.repository.ts";
+import {
+  createShortUrl,
+  findByShortCode,
+  findByUserId,
+} from "../repositories/url.repository.ts";
 import generateShortCode from "../utils/generateShortCode.ts";
 import { CreateShortUrlData } from "../types/url.types.ts";
 
@@ -14,4 +18,19 @@ export const createUrl = async (data: CreateShortUrlData) => {
     },
   });
   return url;
+};
+export const getUrls = async (userId: string) => {
+  const urls = await findByUserId(userId);
+  if (!urls) {
+    throw new Error("No URL not found");
+  }
+  return urls;
+};
+
+export const resolve = async (shortCode: string) => {
+  const originalUrl = await findByShortCode(shortCode);
+  if (!originalUrl) {
+    throw new Error("Short URL not found");
+  }
+  return originalUrl;
 };

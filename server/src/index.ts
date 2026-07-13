@@ -2,8 +2,9 @@ import express, { Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import errorHandler from "./middleware/errorHanddler.ts";
-import authroute from "./routes/auth.routes.ts";
-import urlroute from "./routes/url.routes.ts";
+import authRoute from "./routes/auth.routes.ts";
+import urlRoute from "./routes/url.routes.ts";
+import redirectRoute from "./routes/redirect.routes.ts";
 
 dotenv.config();
 
@@ -18,11 +19,10 @@ app.get("/", (req, res) => {
   });
 });
 
-// 3. THE GLOBAL ERROR HANDLER (Must be last!)
+app.use("/api/auth", authRoute);
+app.use("/api/url", urlRoute);
+app.use("/", redirectRoute);
 app.use(errorHandler);
-app.use("/api/auth", authroute);
-app.use("/api/url", urlroute);
-
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log("Server is running at Port", PORT);
