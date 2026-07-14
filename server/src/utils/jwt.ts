@@ -14,7 +14,7 @@ export const createToken = (userId: string): string => {
     },
     process.env.JWT_SECRET!,
     {
-      expiresIn: "7d",
+      expiresIn: "2d",
     },
   );
 
