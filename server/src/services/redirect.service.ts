@@ -1,5 +1,4 @@
 import {
-  findActiveShortUrl,
   findByShortCode,
   incrementClickCount,
 } from "../repositories/url.repository.ts";
@@ -7,6 +6,7 @@ import {
 import { createClick } from "../repositories/click.repository.ts";
 
 import { getClientInfo } from "../utils/analytics.ts";
+import { getGeoData } from "../utils/geo.ts";
 import { Request } from "express";
 
 export const redirect = async (shortCode: string, req: Request) => {
@@ -16,6 +16,7 @@ export const redirect = async (shortCode: string, req: Request) => {
     throw new Error("Short URL not found");
   }
   const clientInfo = getClientInfo(req);
+  const geoData = await getGeoData(clientInfo.ip);
 
   await createClick({
     browser: clientInfo.browser,
@@ -24,8 +25,8 @@ export const redirect = async (shortCode: string, req: Request) => {
     referer: clientInfo.referer,
     ipHash: clientInfo.ipHash,
 
-    country: "Unknown",
-    city: "Unknown",
+    country: geoData.country,
+    city: geoData.city,
 
     url: {
       connect: {
