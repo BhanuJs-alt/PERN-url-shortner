@@ -15,7 +15,6 @@ export function Header() {
 
         <div>
           <p className="font-semibold text-slate-700">Moon Knight</p>
-          <p className="text-sm text-gray-500">Student</p>
         </div>
       </div>
     </header>

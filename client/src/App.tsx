@@ -1,11 +1,13 @@
-import { Sidebar } from "./components/Sidebar.tsx";
+import { Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard.tsx";
+import HomePage from "./pages/HomePage.tsx";
+
 function App() {
   return (
-    <div className="flex min-h-screen">
-      <Sidebar />
-      <Dashboard />
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+    </Routes>
   );
 }
 
