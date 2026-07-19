@@ -1,5 +1,19 @@
 import { Link, ChartColumn, TrendingUp, Globe } from "lucide-react";
+import { useState } from "react";
+import api from "../api/axios";
 export function HeroSection() {
+  const [inputValue, setInputValue] = useState("");
+
+  function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setInputValue(event.target.value);
+  }
+  async function handleClick() {
+    const response = await api.post("/url/short-url", {
+      originalUrl: inputValue,
+    });
+    console.log(response.data);
+    setInputValue("");
+  }
   return (
     <section className="bg-white rounded-2xl shadow-sm border p-8">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -10,12 +24,16 @@ export function HeroSection() {
 
           <div className="mt-8 flex gap-4">
             <input
+              onChange={handleInputChange}
               type="text"
               placeholder="Enter your long URL here e.g. https://www.example.com/very/long/url"
               className="flex-1 rounded-xl border border-gray-300 px-5 py-4 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
             />
 
-            <button className="bg-blue-600 text-white px-8 rounded-xl hover:bg-blue-700 transition">
+            <button
+              onClick={handleClick}
+              className="bg-blue-600 text-white px-8 rounded-xl hover:bg-blue-700 transition"
+            >
               Generate
             </button>
           </div>
