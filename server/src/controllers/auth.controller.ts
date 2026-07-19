@@ -43,7 +43,6 @@ export const login = async (
       .status(201)
       .json({
         user,
-        message: "login successfully",
       });
   } catch (error) {
     next(error);

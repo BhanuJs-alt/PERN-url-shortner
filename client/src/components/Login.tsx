@@ -1,12 +1,16 @@
 import { useState } from "react";
 import api from "../api/axios";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext.tsx";
 
 export const Login = () => {
   const [formdata, setFormData] = useState({
     email: "",
     password: "",
   });
+  const { setUser } = useContext(AuthContext)!;
+
   function handleForm(e) {
     setFormData((prev) => ({
       ...prev,
@@ -19,7 +23,8 @@ export const Login = () => {
     e.preventDefault();
 
     try {
-      await api.post("auth/login", formdata);
+      const result = await api.post("auth/login", formdata);
+      setUser(result.data.user);
       navigate("/dashboard");
       console.log("login success");
     } catch (error) {
