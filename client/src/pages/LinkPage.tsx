@@ -32,9 +32,14 @@ export const LinkPage = () => {
             >
               {url.originalUrl}
             </a>
-            <span className="block text-sm text-gray-500">
-              Short URL: {url.shortCode}
-            </span>
+            <a
+              href={`http://localhost:5000/${url.shortCode}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block text-sm text-gray-500 hover:underline"
+            >
+              {url.shortCode}
+            </a>
             <span className="block text-sm text-gray-500">
               CreatedAt: {url.createdAt}
             </span>

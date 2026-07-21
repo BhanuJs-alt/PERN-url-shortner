@@ -28,7 +28,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use("/api/auth", authRoute);
 app.use("/api/urls", urlRoute);
-app.use("/api/redirect", redirectRoute);
+app.use("/", redirectRoute);
 app.use(errorHandler);
 
 export default app;

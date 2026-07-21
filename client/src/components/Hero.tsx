@@ -8,7 +8,7 @@ export function HeroSection() {
     setInputValue(event.target.value);
   }
   async function handleClick() {
-    const response = await api.post("/url/short-url", {
+    const response = await api.post("/urls", {
       originalUrl: inputValue,
     });
     console.log(response.data);
