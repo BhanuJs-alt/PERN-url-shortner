@@ -1,4 +1,10 @@
-import { LayoutDashboard, Link, ChartColumn, Settings } from "lucide-react";
+import {
+  LayoutDashboard,
+  Link2Icon,
+  ChartColumn,
+  Settings,
+} from "lucide-react";
+import { Link } from "react-router-dom";
 export function Sidebar() {
   return (
     <div className="flex">
@@ -15,20 +21,20 @@ export function Sidebar() {
             Dashboard
           </a>
 
-          <a
-            href="#"
+          <Link
+            to="/links"
             className="block px-4 py-3 rounded-lg hover:bg-slate-300 transition"
           >
             <ChartColumn className="inline-block mr-3" />
-            Analytics
-          </a>
+            Links
+          </Link>
 
           <a
             href="#"
             className="block px-4 py-3 rounded-lg hover:bg-slate-300 transition"
           >
-            <Link className="inline-block mr-3" />
-            Links
+            <Link2Icon className="inline-block mr-3" />
+            Analytics
           </a>
           <a
             href="#"

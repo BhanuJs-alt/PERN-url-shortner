@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
+import { LinkPage } from "./pages/Linkpage.tsx";
 
 function App() {
   return (
@@ -13,6 +14,14 @@ function App() {
         element={
           <ProtectedRoute>
             <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/links"
+        element={
+          <ProtectedRoute>
+            <LinkPage />
           </ProtectedRoute>
         }
       />

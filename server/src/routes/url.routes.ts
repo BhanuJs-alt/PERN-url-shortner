@@ -7,11 +7,11 @@ import { createShortUrlSchema } from "../validators/url.validator.ts";
 const router = Router();
 
 router.post(
-  "/short-url",
+  "/",
   authMiddleware,
   validate(createShortUrlSchema),
   createShortUrl,
 );
-router.get("/short-url", authMiddleware, getUrls);
+router.get("/", authMiddleware, getUrls);
 
 export default router;

@@ -27,7 +27,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use("/api/auth", authRoute);
-app.use("/api/url", urlRoute);
+app.use("/api/urls", urlRoute);
 app.use("/api/redirect", redirectRoute);
 app.use(errorHandler);
 
