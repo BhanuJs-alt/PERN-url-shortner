@@ -6,6 +6,7 @@ import errorHandler from "./middleware/errorHanddler.ts";
 import authRoute from "./routes/auth.routes.ts";
 import urlRoute from "./routes/url.routes.ts";
 import redirectRoute from "./routes/redirect.routes.ts";
+import analyticsRoute from "./routes/analytics.routes.ts";
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use("/api/auth", authRoute);
 app.use("/api/urls", urlRoute);
+app.use("/api/analytics", analyticsRoute);
 app.use("/", redirectRoute);
 app.use(errorHandler);
 

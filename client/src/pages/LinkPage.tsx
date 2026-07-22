@@ -1,13 +1,21 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
 
+export interface ShortUrl {
+  id: string;
+  shortCode: string;
+  originalUrl: string;
+  createdAt: string;
+  clickCount: number;
+}
+
 export const LinkPage = () => {
-  const [urls, setUrls] = useState([]);
+  const [urls, setUrls] = useState<ShortUrl[]>([]);
   useEffect(() => {
     const fetchUrls = async () => {
       try {
         const response = await api.get("/urls");
-        const data = await response.data;
+        const data: ShortUrl[] = await response.data;
         setUrls(data);
         console.log("Fetched URLs:", data);
       } catch (error) {
@@ -22,7 +30,7 @@ export const LinkPage = () => {
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Your Shortened URLs</h1>
       <ul className="space-y-2">
-        {urls.map((url: any) => (
+        {urls.map((url: ShortUrl) => (
           <li key={url.id} className="border p-2">
             <a
               href={url.originalUrl}

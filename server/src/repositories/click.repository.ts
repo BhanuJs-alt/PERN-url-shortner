@@ -47,3 +47,12 @@ export const osStats = async (urlId: string) => {
     },
   });
 };
+export const geoStats = async (urlId: string) => {
+  return prisma.click.groupBy({
+    by: ["country"],
+    where: { urlId },
+    _count: {
+      country: true,
+    },
+  });
+};
