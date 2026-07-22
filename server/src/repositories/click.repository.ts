@@ -56,3 +56,28 @@ export const geoStats = async (urlId: string) => {
     },
   });
 };
+export const clickOverTime = async (urlId: string) => {
+  return prisma.$queryRaw`
+  SELECT
+    DATE("createdAt") AS date,
+    COUNT(*)::int AS clicks
+  FROM "Click"
+  WHERE "urlId" = ${urlId}
+  GROUP BY DATE("createdAt")
+  ORDER BY date ASC;
+`;
+};
+export const uniqueVisitors = async (urlId: string) => {
+  return prisma.click.groupBy({
+    by: ["ipHash"],
+    where: {
+      urlId,
+      ipHash: {
+        not: null,
+      },
+    },
+    _count: {
+      ipHash: true,
+    },
+  });
+};
