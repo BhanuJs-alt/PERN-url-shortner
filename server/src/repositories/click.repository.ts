@@ -81,3 +81,12 @@ export const uniqueVisitors = async (urlId: string) => {
     },
   });
 };
+export const refererStats = async (urlId: string) => {
+  return prisma.click.groupBy({
+    by: ["referer"],
+    where: { urlId },
+    _count: {
+      referer: true,
+    },
+  });
+};
