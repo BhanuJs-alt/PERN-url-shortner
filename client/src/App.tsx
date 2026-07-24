@@ -2,7 +2,8 @@ import { Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard.tsx";
 import HomePage from "./pages/HomePage.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
-import { LinkPage } from "./pages/Linkpage.tsx";
+import { LinkPage } from "./pages/LinkPage.tsx";
+import { Analytics } from "./pages/Analytics.tsx";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           </ProtectedRoute>
         }
       />
+      <Route path="/analytics" element={<Analytics />} />
     </Routes>
   );
 }

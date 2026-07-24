@@ -29,20 +29,20 @@ export function Sidebar() {
             Links
           </Link>
 
-          <a
-            href="#"
+          <Link
+            to="/analytics"
             className="block px-4 py-3 rounded-lg hover:bg-slate-300 transition"
           >
             <Link2Icon className="inline-block mr-3" />
             Analytics
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            to="/settings"
             className="block px-4 py-3 rounded-lg hover:bg-slate-300 transition"
           >
             <Settings className="inline-block mr-3" />
             Settings
-          </a>
+          </Link>
         </nav>
       </aside>
     </div>
